@@ -119,6 +119,7 @@ class Cow {
             for (var i in grassArr) {
                 if (this.x == grassArr[i].x && this.y == grassArr[i].y) {
                     grassArr.splice(i, 1);
+                    break;
                 }
             }
 
@@ -142,6 +143,7 @@ class Cow {
             for (var i in tgrassArr) {
                 if (this.x == tgrassArr[i].x && this.y == tgrassArr[i].y) {
                     tgrassArr.splice(i, 1);
+                    break;
                 }
             }
 
@@ -160,6 +162,7 @@ class Cow {
         for (var i in CowArr) {
             if (this.x == CowArr[i].x && this.y == CowArr[i].y) {
                 CowArr.splice(i, 1);
+                break;
             }
 
 
@@ -221,6 +224,7 @@ class Wolf {
             for (var i in grassArr) {
                 if (this.x == grassArr[i].x && this.y == grassArr[i].y) {
                     grassArr.splice(i, 1);
+                    break;
                 }
             }
 
@@ -233,6 +237,7 @@ class Wolf {
             for (var i in tgrassArr) {
                 if (this.x == tgrassArr[i].x && this.y == tgrassArr[i].y) {
                     tgrassArr.splice(i, 1);
+                    break;
                 }
             }
 
@@ -263,6 +268,7 @@ class Wolf {
             for (var i in grassArr) {
                 if (this.x == grassArr[i].x && this.y == grassArr[i].y) {
                     grassArr.splice(i, 1);
+                    break;
                 }
             }
             matrix[wy][nwx] = 3;
@@ -287,6 +293,7 @@ class Wolf {
             for (var i in CowArr) {
                 if (this.x == CowArr[i].x && this.y == CowArr[i].y) {
                     CowArr.splice(i, 1);
+                    break;
                 }
             }
             matrix[this.y][this.x] = 3;
@@ -309,6 +316,7 @@ class Wolf {
         for (var i in WolfArr) {
             if (this.x == WolfArr[i].x && this.y == WolfArr[i].y) {
                 WolfArr.splice(i, 1)
+                break;
             }
         }
     }
