@@ -30,7 +30,7 @@ module.exports = class Grass {
     }
     bazmanal() {
         this.multiply++;
-        var norVandak = random(this.yntrelVandak(0));
+        var norVandak = this.yntrelVandak(0)[Math.floor(Math.random() * this.yntrelVandak(0).length)];
         if (this.multiply >= 1 && norVandak) {
             var norXot = new Grass(norVandak[0], norVandak[1]);
             grassArr.push(norXot);

@@ -13,13 +13,13 @@ var Wolf = require("./class-wolf.js");
 var tGrass = require("./class-tgrass.js");
 var Grass = require("./class-grass.js");
 
-var matrix = [];
-var CowArr = [];
-var grassArr = [];
-var tgrassArr = [];
+ matrix = [];
+ CowArr = [];
+ grassArr = [];
+ tgrassArr = [];
 //var vorsord = [];
 //var takardArr = [];
-var WolfArr = [];
+ WolfArr = [];
 
 for (var y = 0; y < 26; y++) {
     matrix[y] = [];
@@ -93,3 +93,5 @@ function draw() {
 }
 
 setInterval(draw, 1000);
+
+io.sockets.emit("matrix", matrix);

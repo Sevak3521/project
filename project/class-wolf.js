@@ -35,9 +35,9 @@ module.exports = class Wolf {
         return found;
     }
     move() {
-        var cell = random(this.chooseCell(0));
-        var lcell = random(this.chooseCell(1));
-        var tcell = random(this.chooseCell(4));
+        var cell = this.chooseCell(0)[Math.floor(Math.random() * this.chooseCell(0).length)];
+        var lcell = this.chooseCell(1)[Math.floor(Math.random() * this.chooseCell(1).length)];
+        var tcell = this.chooseCell(4)[Math.floor(Math.random() * this.chooseCell(4).length)];
         if (lcell) {
             matrix[this.y][this.x] = 0;
             this.y = lcell[1];
@@ -79,10 +79,8 @@ module.exports = class Wolf {
         }
     }
     spread() {
-        var newCell = this.chooseCell(0);
-        var newLCell = this.chooseCell(1);
-        var newCellRand = random(newCell);
-        var newLCellRand = random(newLCell);
+        var newCellRand = this.chooseCell(0)[Math.floor(Math.random() * this.chooseCell(0).length)];
+        var newLCellRand = this.chooseCell(1)[Math.floor(Math.random() * this.chooseCell(1).length)];
         if (newLCellRand) {
             var nwx = newLCellRand[1];
             var wy = newLCellRand[0];
@@ -105,8 +103,8 @@ module.exports = class Wolf {
         }
     }
     eat() {
-        var ecell = random(this.chooseCell(2));
-        var takard = random(this.chooseCell(6));
+        var ecell = this.chooseCell(2)[Math.floor(Math.random() * this.chooseCell(2).length)];
+        var takard = this.chooseCell(6)[Math.floor(Math.random() * this.chooseCell(6).length)];
         if (ecell) {
             matrix[this.y][this.x] = 0;
             this.y = ecell[1];

@@ -38,7 +38,7 @@ module.exports = class Cow {
     }
 
     move() {
-        var cell = random(this.chooseCell(0));
+        var cell = this.chooseCell(0)[Math.floor(Math.random() * this.chooseCell(0).length)];
         if (cell) {
             matrix[this.y][this.x] = 0;
             this.y = cell[1];
@@ -52,8 +52,7 @@ module.exports = class Cow {
     }
 
     spread() {
-        var newCell = this.chooseCell(0);
-        var newCellRand = random(newCell);
+        var newCellRand = this.chooseCell(0)[Math.floor(Math.random() * this.chooseCell(0).length)];
         this.multiply++;
         if (newCellRand) {
             var nwx = newCellRand[1];
@@ -66,9 +65,9 @@ module.exports = class Cow {
     }
 
     eat() {
-        var ecell = random(this.chooseCell(1));
-        var tecell = random(this.chooseCell(4));
-        var takard = random(this.chooseCell(6));
+        var ecell = this.chooseCell(1)[Math.floor(Math.random() * this.chooseCell(1).length)];
+        var tecell = this.chooseCell(4)[Math.floor(Math.random() * this.chooseCell(4).length)];
+        var takard = this.chooseCell(6)[Math.floor(Math.random() * this.chooseCell(6).length)];
         if (ecell) {
             matrix[this.y][this.x] = 0;
             this.y = ecell[1];
