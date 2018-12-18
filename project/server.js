@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var tact = 0;
 
 app.use(express.static("."));
 app.get('/', function (req, res) {
@@ -13,13 +15,13 @@ var Wolf = require("./class-wolf.js");
 var tGrass = require("./class-tgrass.js");
 var Grass = require("./class-grass.js");
 
- matrix = [];
- CowArr = [];
- grassArr = [];
- tgrassArr = [];
+matrix = [];
+CowArr = [];
+grassArr = [];
+tgrassArr = [];
 //var vorsord = [];
 //var takardArr = [];
- WolfArr = [];
+WolfArr = [];
 
 for (var y = 0; y < 26; y++) {
     matrix[y] = [];
@@ -67,31 +69,65 @@ for (var y = 0; y < matrix.length; ++y) {
     }
 }
 
+var season;
+
+function spring(){
+    season="spring";
+}
+
+function summer(){
+    season="summer";
+}
+
+function autumn(){
+    season="autumn";
+}
+
+function winter(){
+    season="winter";
+}
+
 
 
 function draw() {
+    if(tact%20>=0 && tact%20<5)
+        spring();
+    else if(tact%20>=5 && tact%20<10) 
+        summer();
+    else if(tact%20>=10 && tact%20<15)  
+        autumn();
+    else if(tact%20>=15 && tact%20<20)
+        winter();
+    
     for (var i in grassArr) {
 
         grassArr[i].bazmanal();
 
     }
+
     for (var i in CowArr) {
 
         CowArr[i].eat();
 
     }
+
     for (var i in WolfArr) {
 
         WolfArr[i].eat();
 
     }
+
     for (var i in tgrassArr) {
 
         tgrassArr[i].bazmanal();
 
     }
+
+    io.sockets.emit("season", season);
+    io.sockets.emit("matrix", matrix);
+    tact++;
 }
 
 setInterval(draw, 1000);
 
-io.sockets.emit("matrix", matrix);
+
