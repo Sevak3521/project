@@ -23,9 +23,9 @@ tgrassArr = [];
 //var takardArr = [];
 WolfArr = [];
 
-for (var y = 0; y < 26; y++) {
+for (var y = 0; y < 30; y++) {
     matrix[y] = [];
-    for (var x = 0; x < 26; x++) {
+    for (var x = 0; x < 30; x++) {
         ra = Math.round(Math.random() * 100);
         if (ra < 70) {
             matrix[y][x] = 1;
@@ -68,6 +68,53 @@ for (var y = 0; y < matrix.length; ++y) {
 
     }
 }
+
+io.on('connection', function (socket) {
+    socket.on("eventCordinat", function(c){
+        x = c[0];
+        y = c[1];
+        if(matrix[y][x]==2)
+        {
+            for (var i in CowArr) {
+                if (this.x == CowArr[i].x && this.y == CowArr[i].y) {
+                    CowArr.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+        else if(matrix[y][x]==1)
+        {
+            for (var i in grassArr) {
+                if (grassArr[i].x == this.x && grassArr[i].y == this.y) {
+                    grassArr.splice(i, 1);
+                }
+            }
+        }
+
+        else if(matrix[y][x]==4)
+        {
+            for (var i in tgrassArr) {
+                if (this.x == tgrassArr[i].x && this.y == tgrassArr[i].y) {
+                    tgrassArr.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        else if(matrix[y][x]==3)
+        {
+            for (var i in WolfArr) {
+                if (this.x == WolfArr[i].x && this.y == WolfArr[i].y) {
+                    WolfArr.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+        matrix[y][x] = 2;
+        CowArr.push(new Cow(x*1, y*1, 2));
+    });
+ });
 
 var season;
 

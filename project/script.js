@@ -22,6 +22,21 @@ function setup() {
     background("#acacac");
 }
 
+function mousePressed() {
+    var cordinates = [];
+    if (mouseX % side != 0 && mouseY % side != 0) {
+        x = Math.floor(mouseX / side);
+        y = Math.floor(mouseY / side);
+        
+    }
+    cordinates[0] = x;
+    cordinates[1] = y;
+    if (x<=24 && y<=24)
+        socket.emit("eventCordinat", cordinates);
+}
+
+
+
 function drawMatrix(matrix) {
     background("#acacac");
     for (var y in matrix) {

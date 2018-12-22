@@ -37,6 +37,16 @@ module.exports = class Cow {
         return found;
     }
 
+    die() {
+        matrix[this.y][this.x] = 0;
+        for (var i in CowArr) {
+            if (this.x == CowArr[i].x && this.y == CowArr[i].y) {
+                CowArr.splice(i, 1);
+                break;
+            }
+        }
+    }
+
     move() {
         var cell = this.chooseCell(0)[Math.floor(Math.random() * this.chooseCell(0).length)];
         if (cell) {
@@ -81,11 +91,11 @@ module.exports = class Cow {
 
             matrix[this.y][this.x] = 2;
             this.energy++;
-            if (this.energy == 10) {
+            if (this.energy == 5) {
                 this.energy--;
             }
             this.s++;
-            if (this.s == 2) {
+            if (this.s == 5) {
                 this.spread();
                 this.s = 0;
             }
@@ -113,16 +123,5 @@ module.exports = class Cow {
         }
 
     }
-    die() {
-        matrix[this.y][this.x] = 0;
-        for (var i in CowArr) {
-            if (this.x == CowArr[i].x && this.y == CowArr[i].y) {
-                CowArr.splice(i, 1);
-                break;
-            }
-
-
-        }
-    }
-
+  
 }
