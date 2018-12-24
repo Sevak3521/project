@@ -3,6 +3,7 @@ module.exports = class Cow {
         this.x = x;
         this.y = y;
         this.s = 0;
+        this.ss = 6;
         this.color = "yellow";
         this.multiply = 0;
         this.energy = 4;
@@ -45,6 +46,7 @@ module.exports = class Cow {
                 break;
             }
         }
+        merac_cow++;
     }
 
     move() {
@@ -88,14 +90,14 @@ module.exports = class Cow {
                     break;
                 }
             }
-
+            kovi_kerac++;
             matrix[this.y][this.x] = 2;
             this.energy++;
-            if (this.energy == 5) {
-                this.energy--;
+            if (this.energy > 3) {
+                this.energy = 3;
             }
             this.s++;
-            if (this.s == 5) {
+            if (this.s >= this.ss) {
                 this.spread();
                 this.s = 0;
             }

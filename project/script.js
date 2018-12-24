@@ -31,7 +31,7 @@ function mousePressed() {
     }
     cordinates[0] = x;
     cordinates[1] = y;
-    if (x<=24 && y<=24)
+    if (x<=29 && y<=29)
         socket.emit("eventCordinat", cordinates);
 }
 

@@ -1,6 +1,7 @@
 module.exports = class Grass {
     constructor(x, y) {
         this.x = x;
+        this.s = 2;
         this.y = y;
         this.color = "green";
         this.multiply = 0;
@@ -31,11 +32,12 @@ module.exports = class Grass {
     bazmanal() {
         this.multiply++;
         var norVandak = this.yntrelVandak(0)[Math.floor(Math.random() * this.yntrelVandak(0).length)];
-        if (this.multiply >= 1 && norVandak) {
+        if (this.multiply >= this.s && norVandak) {
             var norXot = new Grass(norVandak[0], norVandak[1]);
             grassArr.push(norXot);
             matrix[norVandak[1]][norVandak[0]] = 1;
             this.multiply = 0;
+            arajacac_grass++;
         }
     }
 

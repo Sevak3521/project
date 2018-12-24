@@ -3,6 +3,7 @@ module.exports = class Wolf {
         this.x = x;
         this.y = y;
         this.s=0;
+        this.ss=4;
         this.color = "red";
         this.energy = 6;
         this.s = 0;
@@ -115,13 +116,14 @@ module.exports = class Wolf {
                     break;
                 }
             }
+            merac_cow++;
             matrix[this.y][this.x] = 3;
             this.energy++;
-            if (this.energy == 10) {
-                this.energy--;
+            if (this.energy > 10) {
+                this.energy = 10;
             }
             this.s++;
-            if (this.s == 4 ) {
+            if (this.s >= this.ss ) {
                 this.spread();
                 this.s=0;
             }
@@ -138,5 +140,6 @@ module.exports = class Wolf {
                 break;
             }
         }
+        merac_wolf++;
     }
 }

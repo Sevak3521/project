@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var fs = require('fs');
 var tact = 0;
 
 app.use(express.static("."));
@@ -22,6 +23,11 @@ tgrassArr = [];
 //var vorsord = [];
 //var takardArr = [];
 WolfArr = [];
+merac_wolf=0;
+merac_cow=0;
+arajacac_grass=0;
+kovi_kerac=0;
+klikov_kow=0;
 
 for (var y = 0; y < 30; y++) {
     matrix[y] = [];
@@ -51,6 +57,7 @@ for (var y = 0; y < matrix.length; ++y) {
         if (matrix[y][x] == 1) {
 
             grassArr.push(new Grass(x, y));
+            arajacac_grass++;
         }
         else if (matrix[y][x] == 2) {
 
@@ -81,6 +88,7 @@ io.on('connection', function (socket) {
                     break;
                 }
             }
+            merac_cow++;
         }
 
         else if(matrix[y][x]==1)
@@ -109,10 +117,12 @@ io.on('connection', function (socket) {
                     break;
                 }
             }
+            merac_wolf++;
         }
 
         matrix[y][x] = 2;
         CowArr.push(new Cow(x*1, y*1, 2));
+        klikov_kow++;
     });
  });
 
@@ -120,18 +130,71 @@ var season;
 
 function spring(){
     season="spring";
+    for (var i in grassArr) {
+        grassArr[i].s=1;
+    }
+
+    for (var i in tgrassArr) {
+        tgrassArr[i].s=5;
+    }
+
+    for (var i in WolfArr) {
+        WolfArr[i].ss=2;
+    }
+
+    for (var i in CowArr) {
+        CowArr[i].ss=2;
+    }
 }
 
 function summer(){
     season="summer";
+    for (var i in grassArr) {
+        grassArr[i].s=2;
+    }
+
+    for (var i in tgrassArr) {
+        tgrassArr[i].s=10;
+    }
+
+    for (var i in WolfArr) {
+        WolfArr[i].ss=4;
+        WolfArr[i].energy+=2;
+    }
+
+    for (var i in CowArr) {
+        CowArr[i].ss=3;
+        CowArr[i].energy+=2;
+    }
 }
 
 function autumn(){
     season="autumn";
+    for (var i in grassArr) {
+        grassArr[i].s=3;
+    }
+
+    for (var i in tgrassArr) {
+        tgrassArr[i].s=11;
+    }
+
+    for (var i in WolfArr) {
+        WolfArr[i].ss=5;
+    }
+
+    for (var i in CowArr) {
+        CowArr[i].ss=4;
+    }
 }
 
 function winter(){
     season="winter";
+    for (var i in CowArr) {
+        CowArr[i].energy-=2;
+    }
+    for (var i in CowArr) {
+        CowArr[i].energy--;
+    }
 }
 
 
@@ -175,6 +238,20 @@ function draw() {
     tact++;
 }
 
+function stats() {
+
+    var stat = { dead_wolf_number : merac_wolf,
+                 dead_cow_number : merac_cow,
+                 appeared_grass_number : arajacac_grass,
+                 cow_grass_number : kovi_kerac,
+                 click_cow_number: klikov_kow
+    };
+    var myJSON = JSON.stringify(stat);
+    
+    fs.writeFileSync("statistics.json", myJSON+"\n");
+}
+
 setInterval(draw, 1000);
+setInterval(stats, 100);
 
 
